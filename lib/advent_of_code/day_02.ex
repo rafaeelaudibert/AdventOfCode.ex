@@ -1,13 +1,41 @@
 import AdventOfCode.Helpers.Input
 
 defmodule AdventOfCode.Day02 do
+  use Bitwise
+
+  defp parse_input(content) do
+    [digits, letter, password] = String.split(content, " ")
+    [{digit_0, _}, {digit_1, _}] = String.split(digits, "-") |> Enum.map(&Integer.parse/1)
+    letter = String.slice(letter, 0..0)
+
+    {digit_0, digit_1, letter, password}
+  end
+
+  defp is_on_range({digit_0, digit_1, letter, password}) do
+    count = password |> String.graphemes() |> Enum.count(fn x -> x == letter end)
+    count >= digit_0 and count <= digit_1
+  end
+
+  defp is_on_positions({position_0, position_1, letter, password}) do
+    graphemes = password |> String.graphemes()
+    at_0 = Enum.at(graphemes, position_0 - 1) == letter
+    at_1 = Enum.at(graphemes, position_1 - 1) == letter
+    (at_0 && !at_1) || (!at_0 && at_1)
+  end
+
   @spec part1(String.t()) :: integer
   def part1(test_filename) do
-    input = read_integers(test_filename)
+    read_lines(test_filename)
+      |> Enum.map(&parse_input/1)
+      |> Enum.map(&is_on_range/1)
+      |> Enum.count(&(&1 == true))
   end
 
   @spec part2(String.t()) :: integer
   def part2(test_filename) do
-    input = read_integers(test_filename)
+    read_lines(test_filename)
+      |> Enum.map(&parse_input/1)
+      |> Enum.map(&is_on_positions/1)
+      |> Enum.count(&(&1 == true))
   end
 end
