@@ -1,17 +1,15 @@
 defmodule Mix.Tasks.D23.P2 do
   use Mix.Task
-
-  import AdventOfCode.Day23
-
+  
   @shortdoc "Day 23 Part 2"
   def run(args) do
-    input = nil
+    test_filename = Path.join(File.cwd!, "input/input23.txt")
 
     if Enum.member?(args, "-b"),
-      do: Benchee.run(%{part_2: fn -> input |> part2() end}),
+      do: Benchee.run(%{part_2: fn -> test_filename |> AdventOfCode.Day23.part2() end }),
       else:
-        input
-        |> part2()
+        test_filename
+        |> AdventOfCode.Day23.part2()
         |> IO.inspect(label: "Part 2 Results")
   end
 end
