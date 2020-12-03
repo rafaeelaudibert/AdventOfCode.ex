@@ -31,7 +31,7 @@ defmodule AdventOfCode.Day02 do
     read_lines(test_filename)
       |> Enum.map(&parse_line/1)
       |> Enum.map(&is_on_range/1)
-      |> Enum.count(&(&1 == true))
+      |> Enum.count(& &1)
   end
 
   @spec part2(String.t()) :: non_neg_integer()
@@ -39,6 +39,6 @@ defmodule AdventOfCode.Day02 do
     read_lines(test_filename)
       |> Enum.map(&parse_line/1)
       |> Enum.map(&is_on_positions/1)
-      |> Enum.count(&(&1 == true))
+      |> Enum.count(& &1)
   end
 end
