@@ -1,5 +1,7 @@
 # Advent of Elixir
 
+![CI Badge](https://github.com/rafaeelaudibert/adventofcode.ex/workflows/test/badge.svg)
+
 Repository containing the working in progress solutions for 2020 AOC in Elixir.
 
  > Disclaimer: I'm a totally beginner in Elixir, and you can be totally sure that every code contained in this repository isn't the right way to solve the problems in Elixir.
