@@ -9,6 +9,6 @@ defmodule AdventOfCode.Helpers.Input do
 
     def read_lines(filename) do
         with {:ok, file} <- File.read(filename),
-            do: file |> String.replace("\r", "") |> String.split("\n", trim: true)
+            do: file |> String.replace("\r", "") |> String.split("\n")
     end
 end
