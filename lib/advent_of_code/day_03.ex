@@ -4,9 +4,9 @@ defmodule AdventOfCode.Day03 do
 
   @spec compute_trees([[String.t()]], {non_neg_integer, non_neg_integer}) :: non_neg_integer
   defp compute_trees(matrix, {slope_x, slope_y}) do
-    size = Enum.count(matrix)
-    size_inside = Enum.at(matrix, 0) |> Enum.count()
-
+    size = length(matrix)
+    size_inside = List.first(matrix) |> length()
+    
     Stream.take_every(0..size-1, slope_y)
       |> Enum.with_index()
       |> Enum.reduce(0, fn {x, idx}, acc ->
