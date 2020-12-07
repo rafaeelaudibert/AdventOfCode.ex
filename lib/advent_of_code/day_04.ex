@@ -23,11 +23,7 @@ defmodule AdventOfCode.Day04 do
   end
 
   defp parse_input(input) do
-    input
-      |> Enum.chunk_by(& &1 == "")
-      |> Enum.filter(& &1 != "")
-      |> Enum.map(& &1 |> Enum.join(" "))
-      |> Enum.map(& &1 |> String.split(" "))
+    input |> Enum.map(& &1 |> Enum.join(" ") |> String.split(" "))
   end
 
   defp build_set(input) do
@@ -41,7 +37,7 @@ defmodule AdventOfCode.Day04 do
   @spec part1(String.t()) :: non_neg_integer()
   def part1(test_filename) do
     keys = MapSet.new(~w[byr iyr eyr hgt hcl ecl pid])
-    read_lines(test_filename)
+    read_chunked_lines(test_filename)
       |> parse_input()
       |> Enum.map(& build_set(&1))
       |> Enum.map(&MapSet.subset?(keys, &1))
@@ -51,7 +47,7 @@ defmodule AdventOfCode.Day04 do
   @spec part2(String.t()) :: non_neg_integer()
   def part2(test_filename) do
     keys = MapSet.new(~w[byr iyr eyr hgt hcl ecl pid])
-    read_lines(test_filename)
+    read_chunked_lines(test_filename)
       |> parse_input()  
       |> Enum.map(fn list -> {
           build_set(list),
