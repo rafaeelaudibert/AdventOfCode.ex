@@ -5,7 +5,7 @@ defmodule AdventOfCode.Day07 do
   @type graph :: %{String.t() => [String.t()]}
 
   @spec parse_bags_string(String.t()) :: {String.t(), [bag()]}
-  def parse_bags_string(bags_string) do
+  defp parse_bags_string(bags_string) do
     [_ | [bag_color, other_colors]] = Regex.run(~r/(.+) bags contain (.+)\./U, bags_string)
 
     other_colors =
@@ -22,7 +22,7 @@ defmodule AdventOfCode.Day07 do
   end
 
   @spec graph_size(graph, String.t()) :: non_neg_integer()
-  def graph_size(graph, start) do
+  defp graph_size(graph, start) do
     Stream.unfold([{0, start}], fn
       [] -> nil
       [{_, head} | tail] -> {head, tail ++ (graph[head] || [])}
@@ -32,17 +32,8 @@ defmodule AdventOfCode.Day07 do
     |> (&(&1 - 1)).()
   end
 
-  @doc """
-    This builds a reversed graph, according to the entry.
-
-    Returns a new graph with the edges reversed, but keeping the same weights.
-
-    ## Examples
-        iex> reverse_graph([{"abc", [{"2", "abcde"}]}])
-        %{"abcde" => ["abc"]}
-  """
   @spec reverse_graph(graph()) :: graph()
-  def reverse_graph(graph) do
+  defp reverse_graph(graph) do
     graph
     |> Enum.reduce(%{}, fn {name, items}, graph ->
       Enum.reduce(items, graph, fn {count, edge}, graph ->
@@ -52,7 +43,7 @@ defmodule AdventOfCode.Day07 do
   end
 
   @spec count_bags(graph, String.t()) :: non_neg_integer()
-  def count_bags(graph, start) do
+  defp count_bags(graph, start) do
     Enum.reduce(graph[start] || [], 0, fn {count, name}, acc ->
       acc + count + count * count_bags(graph, name)
     end)
