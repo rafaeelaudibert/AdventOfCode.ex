@@ -12,7 +12,7 @@ defmodule AdventOfCode.Day05 do
   defp get_input(test_filename) do
     read_lines(test_filename)
     |> Enum.map(&String.graphemes/1)
-    |> Enum.map(&(&1 |> parse_to_binary()))
+    |> Enum.map(&parse_to_binary/1)
   end
 
   @spec part1(String.t()) :: non_neg_integer()
