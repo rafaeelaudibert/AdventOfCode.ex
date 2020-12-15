@@ -7,7 +7,7 @@ defmodule AdventOfCode.Computer do
       commands
       |> Enum.map(fn command ->
         String.split(command, " ")
-        |> (fn [opcode, op1] -> {opcode, Integer.parse(op1) |> elem(0)} end).()
+        |> (fn [opcode, op1] -> {opcode, String.to_integer(op1)} end).()
       end)
 
     %AdventOfCode.Computer{instructions: instructions}

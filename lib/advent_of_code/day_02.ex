@@ -6,7 +6,7 @@ defmodule AdventOfCode.Day02 do
   @spec parse_line(String.t()) :: password()
   defp parse_line(content) do
     [digits, letter, password] = String.split(content, " ")
-    [{digit_0, _}, {digit_1, _}] = String.split(digits, "-") |> Enum.map(&Integer.parse/1)
+    [digit_0, digit_1] = String.split(digits, "-") |> Enum.map(&String.to_integer/1)
     letter = String.slice(letter, 0..0)
 
     {digit_0, digit_1, letter, password}

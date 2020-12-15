@@ -27,7 +27,7 @@ defmodule AdventOfCode.Day15 do
       read_lines(filename)
       |> Enum.at(0)
       |> String.split(",")
-      |> Enum.map(&(&1 |> Integer.parse() |> elem(0)))
+      |> Enum.map(&String.to_integer/1)
 
     solve(
       length(input) + 1,

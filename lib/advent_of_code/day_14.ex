@@ -8,8 +8,8 @@ defmodule AdventOfCode.Day14 do
     if start === "mask" do
       {:mask, nil, value}
     else
-      address = Regex.run(~r/([0-9])+/, start) |> Enum.at(0) |> Integer.parse() |> elem(0)
-      value = Integer.parse(value) |> elem(0)
+      address = Regex.run(~r/([0-9])+/, start) |> Enum.at(0) |> String.to_integer()
+      value = String.to_integer(value)
       {:value, address, value}
     end
   end
@@ -45,8 +45,7 @@ defmodule AdventOfCode.Day14 do
         Enum.zip(String.graphemes(str_value), String.graphemes(new_mask))
         |> Enum.map(fn {char, mask} -> if mask == "X", do: char, else: mask end)
         |> Enum.join()
-        |> Integer.parse(2)
-        |> elem(0)
+        |> String.to_integer(2)
 
       memory = Map.put(memory, address, masked_value)
       {new_mask, memory}
@@ -69,7 +68,7 @@ defmodule AdventOfCode.Day14 do
 
       addresses =
         find_addresses(String.graphemes(str_address), String.graphemes(new_mask))
-        |> Enum.map(fn address -> Integer.parse(address, 2) |> elem(0) end)
+        |> Enum.map(&String.to_integer(&1, 2))
 
       memory = Enum.reduce(addresses, memory, &Map.put(&2, &1, value))
       {new_mask, memory}

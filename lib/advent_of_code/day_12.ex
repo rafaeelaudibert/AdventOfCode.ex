@@ -45,7 +45,7 @@ defmodule AdventOfCode.Day12 do
 
   @spec input_to_command([String.t()]) :: command
   defp input_to_command([command, value]) do
-    {command, Integer.parse(value) |> elem(0)}
+    {command, String.to_integer(value)}
   end
 
   @spec part1(String.t()) :: non_neg_integer()

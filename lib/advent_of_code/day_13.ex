@@ -5,12 +5,12 @@ defmodule AdventOfCode.Day13 do
   def part1(filename) do
     [depart, buses] = read_lines(filename)
 
-    depart = Integer.parse(depart) |> elem(0)
+    depart = String.to_integer(depart)
 
     buses =
       String.split(buses, ",")
       |> Enum.filter(&(&1 != "x"))
-      |> Enum.map(fn bus -> bus |> Integer.parse() |> elem(0) end)
+      |> Enum.map(&String.to_integer/1)
 
     Stream.iterate(depart, &(&1 + 1))
     |> Enum.find_value(fn time ->
@@ -27,7 +27,7 @@ defmodule AdventOfCode.Day13 do
       String.split(buses, ",")
       |> Enum.with_index()
       |> Enum.filter(fn {val, _} -> val != "x" end)
-      |> Enum.map(fn {bus, idx} -> {bus |> Integer.parse() |> elem(0), idx} end)
+      |> Enum.map(fn {bus, idx} -> {String.to_integer(bus), idx} end)
 
     mods = Enum.map(buses, &elem(&1, 0))
     remainders = Enum.map(buses, fn {bus, idx} -> rem(-idx + bus * 10, bus) end)

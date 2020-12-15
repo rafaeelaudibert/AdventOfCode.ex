@@ -16,7 +16,7 @@ defmodule AdventOfCode.Day07 do
         |> List.to_tuple()
       end)
       |> Enum.filter(fn {number, _} -> number != "no" end)
-      |> Enum.map(fn {number, text} -> {Integer.parse(number) |> elem(0), text} end)
+      |> Enum.map(fn {number, text} -> {String.to_integer(number), text} end)
 
     {bag_color, other_colors}
   end
