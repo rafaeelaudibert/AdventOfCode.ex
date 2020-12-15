@@ -8,15 +8,17 @@ defmodule AdventOfCode.Day15 do
        do: last_number
 
   defp solve(curr_index, last_number, map, limit) do
-    # We use the default as list_size, so that we don't need an "if"
-    # This is because when the number hasn't being used we have the following:
-    # list_size - last_index = list_size - list_size = 0
     list_size = curr_index - 1
-    last_index = Map.get(map, last_number, list_size)
 
-    new_number = list_size - last_index
-    map = Map.put(map, last_number, list_size)
-    solve(curr_index + 1, new_number, map, limit)
+    {last_index, map} =
+      Map.get_and_update(map, last_number, fn current_value ->
+        {
+          if(current_value != nil, do: current_value, else: list_size),
+          list_size
+        }
+      end)
+
+    solve(curr_index + 1, list_size - last_index, map, limit)
   end
 
   @spec solve(String.t(), non_neg_integer()) :: non_neg_integer()
