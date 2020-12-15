@@ -77,15 +77,15 @@ defmodule AdventOfCode.Day14 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    read_lines(test_filename)
+  def part1(filename) do
+    read_lines(filename)
     |> Enum.reduce({String.pad_leading("", 36, "X"), %{}}, &solve_part_1/2)
     |> (fn {_, map} -> Map.values(map) |> Enum.reduce(&+/2) end).()
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    read_lines(test_filename)
+  def part2(filename) do
+    read_lines(filename)
     |> Enum.reduce({String.pad_leading("", 36, "X"), %{}}, &solve_part_2/2)
     |> (fn {_, map} -> Map.values(map) |> Enum.reduce(&+/2) end).()
   end

@@ -50,8 +50,8 @@ defmodule AdventOfCode.Day07 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    read_lines(test_filename)
+  def part1(filename) do
+    read_lines(filename)
     |> Enum.map(&parse_bags_string/1)
     |> Map.new()
     |> reverse_graph()
@@ -59,8 +59,8 @@ defmodule AdventOfCode.Day07 do
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    read_lines(test_filename)
+  def part2(filename) do
+    read_lines(filename)
     |> Enum.map(&parse_bags_string/1)
     |> Map.new()
     |> count_bags("shiny gold")

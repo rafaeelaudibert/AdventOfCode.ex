@@ -2,8 +2,8 @@ import AdventOfCode.Helpers.Input
 
 defmodule AdventOfCode.Day13 do
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    [depart, buses] = read_lines(test_filename)
+  def part1(filename) do
+    [depart, buses] = read_lines(filename)
 
     depart = Integer.parse(depart) |> elem(0)
 
@@ -20,8 +20,8 @@ defmodule AdventOfCode.Day13 do
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    [_, buses] = read_lines(test_filename)
+  def part2(filename) do
+    [_, buses] = read_lines(filename)
 
     buses =
       String.split(buses, ",")

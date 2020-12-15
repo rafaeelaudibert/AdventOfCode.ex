@@ -49,16 +49,16 @@ defmodule AdventOfCode.Day12 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    read_lines(test_filename)
+  def part1(filename) do
+    read_lines(filename)
     |> Enum.map(&(&1 |> String.split("", parts: 3) |> Enum.drop(1) |> input_to_command()))
     |> Enum.reduce({0, 0, {1, 0}}, &move_boat_rules_1/2)
     |> (fn {east_pos, north_pos, _} -> abs(east_pos) + abs(north_pos) end).()
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    read_lines(test_filename)
+  def part2(filename) do
+    read_lines(filename)
     |> Enum.map(&(&1 |> String.split("", parts: 3) |> Enum.drop(1) |> input_to_command()))
     |> Enum.reduce({0, 0, {10, 1}}, &move_boat_rules_2/2)
     |> (fn {east_pos, north_pos, _} -> abs(east_pos) + abs(north_pos) end).()

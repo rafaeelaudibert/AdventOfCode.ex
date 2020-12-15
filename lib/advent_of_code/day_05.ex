@@ -9,20 +9,20 @@ defmodule AdventOfCode.Day05 do
   end
 
   @spec get_input(String.t()) :: [non_neg_integer()]
-  defp get_input(test_filename) do
-    read_lines(test_filename)
+  defp get_input(filename) do
+    read_lines(filename)
     |> Enum.map(&String.graphemes/1)
     |> Enum.map(&parse_to_binary/1)
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    get_input(test_filename) |> Enum.max()
+  def part1(filename) do
+    get_input(filename) |> Enum.max()
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    numbers = get_input(test_filename) |> MapSet.new()
+  def part2(filename) do
+    numbers = get_input(filename) |> MapSet.new()
 
     Stream.iterate(Enum.min(numbers), &(&1 + 1))
     |> Enum.find(&(&1 not in numbers))

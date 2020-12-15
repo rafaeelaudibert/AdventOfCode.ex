@@ -38,8 +38,8 @@ defmodule AdventOfCode.Day15 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename), do: solve(test_filename, 2020)
+  def part1(filename), do: solve(filename, 2020)
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename), do: solve(test_filename, 30_000_000)
+  def part2(filename), do: solve(filename, 30_000_000)
 end

@@ -53,10 +53,10 @@ defmodule AdventOfCode.Day04 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
+  def part1(filename) do
     keys = MapSet.new(~w[byr iyr eyr hgt hcl ecl pid])
 
-    read_chunked_lines(test_filename)
+    read_chunked_lines(filename)
     |> parse_input()
     |> Enum.map(&build_set(&1))
     |> Enum.map(&MapSet.subset?(keys, &1))
@@ -64,10 +64,10 @@ defmodule AdventOfCode.Day04 do
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
+  def part2(filename) do
     keys = MapSet.new(~w[byr iyr eyr hgt hcl ecl pid])
 
-    read_chunked_lines(test_filename)
+    read_chunked_lines(filename)
     |> parse_input()
     |> Enum.map(fn list ->
       {

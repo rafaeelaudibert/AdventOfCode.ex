@@ -27,16 +27,16 @@ defmodule AdventOfCode.Day02 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    read_lines(test_filename)
+  def part1(filename) do
+    read_lines(filename)
     |> Enum.map(&parse_line/1)
     |> Enum.map(&is_on_range/1)
     |> Enum.count(& &1)
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    read_lines(test_filename)
+  def part2(filename) do
+    read_lines(filename)
     |> Enum.map(&parse_line/1)
     |> Enum.map(&is_on_positions/1)
     |> Enum.count(& &1)

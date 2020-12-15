@@ -16,16 +16,16 @@ defmodule AdventOfCode.Day08 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    read_lines(test_filename)
+  def part1(filename) do
+    read_lines(filename)
     |> AdventOfCode.Computer.build_from_input()
     |> AdventOfCode.Computer.step_until_halted_or_loop()
     |> (& &1.accumulator).()
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    input = read_lines(test_filename)
+  def part2(filename) do
+    input = read_lines(filename)
 
     parent = self()
 

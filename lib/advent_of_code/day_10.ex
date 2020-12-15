@@ -36,8 +36,8 @@ defmodule AdventOfCode.Day10 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    read_integers(test_filename)
+  def part1(filename) do
+    read_integers(filename)
     |> Enum.sort()
     |> Enum.reduce({0, 0, 1}, fn curr, {before, diff_1, diff_3} ->
       case curr - before do
@@ -50,8 +50,8 @@ defmodule AdventOfCode.Day10 do
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    read_integers(test_filename)
+  def part2(filename) do
+    read_integers(filename)
     |> Enum.sort()
     |> (fn input -> possibilities(0, input, %{}) end).()
     |> (fn {result, _} -> div(result, 2) end).()

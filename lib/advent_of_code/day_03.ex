@@ -16,15 +16,15 @@ defmodule AdventOfCode.Day03 do
   end
 
   @spec part1(String.t()) :: non_neg_integer
-  def part1(test_filename) do
-    read_lines(test_filename)
+  def part1(filename) do
+    read_lines(filename)
     |> Enum.map(&String.graphemes/1)
     |> compute_trees({3, 1})
   end
 
   @spec part2(String.t()) :: non_neg_integer
-  def part2(test_filename) do
-    matrix = read_lines(test_filename) |> Enum.map(&String.graphemes/1)
+  def part2(filename) do
+    matrix = read_lines(filename) |> Enum.map(&String.graphemes/1)
     slopes = [{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}]
 
     slopes

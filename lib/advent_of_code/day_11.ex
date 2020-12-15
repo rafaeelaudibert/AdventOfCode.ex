@@ -94,8 +94,8 @@ defmodule AdventOfCode.Day11 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    read_lines(test_filename)
+  def part1(filename) do
+    read_lines(filename)
     |> Enum.map(&(&1 |> String.graphemes()))
     |> apply_rules_until_stop(&apply_rule_to_idx_1/3)
     |> String.graphemes()
@@ -103,8 +103,8 @@ defmodule AdventOfCode.Day11 do
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    read_lines(test_filename)
+  def part2(filename) do
+    read_lines(filename)
     |> Enum.map(&(&1 |> String.graphemes()))
     |> apply_rules_until_stop(&apply_rule_to_idx_2/3)
     |> String.graphemes()

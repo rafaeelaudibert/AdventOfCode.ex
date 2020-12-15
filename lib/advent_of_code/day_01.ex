@@ -5,7 +5,6 @@ defmodule AdventOfCode.Day01 do
   defp find_multiplication(val, list), do: find_multiplication(val, 2020, list)
   defp find_multiplication(_, _, []), do: false
 
-
   defp find_multiplication(val, target, [head | tail]) do
     if val + head == target,
       do: val * head,
@@ -13,14 +12,14 @@ defmodule AdventOfCode.Day01 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    input = read_integers(test_filename)
+  def part1(filename) do
+    input = read_integers(filename)
     Enum.find_value(input, &find_multiplication(&1, input))
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    input = read_integers(test_filename)
+  def part2(filename) do
+    input = read_integers(filename)
 
     Enum.find_value(input, fn x ->
       case Enum.find_value(input, &find_multiplication(&1, 2020 - x, input)) do

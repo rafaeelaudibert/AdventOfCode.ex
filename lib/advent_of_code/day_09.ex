@@ -36,8 +36,8 @@ defmodule AdventOfCode.Day09 do
   end
 
   @spec part1(String.t()) :: non_neg_integer()
-  def part1(test_filename) do
-    input = read_integers(test_filename)
+  def part1(filename) do
+    input = read_integers(filename)
 
     Stream.iterate(25, &(&1 + 1))
     |> Enum.find_value(fn idx ->
@@ -50,11 +50,11 @@ defmodule AdventOfCode.Day09 do
   end
 
   @spec part2(String.t()) :: non_neg_integer()
-  def part2(test_filename) do
-    # invalid_number = part1(test_filename)
+  def part2(filename) do
+    # invalid_number = part1(filename)
     invalid_number = 50_047_984
 
-    [head_input | tail_input] = read_integers(test_filename)
+    [head_input | tail_input] = read_integers(filename)
 
     find_list_of_sum([head_input], head_input, invalid_number, tail_input)
     |> (fn list -> [Enum.max(list), Enum.min(list)] end).()
