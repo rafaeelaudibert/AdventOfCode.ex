@@ -29,6 +29,7 @@ defmodule AdventOfCode.Day17 do
     end)
   end
 
+  @spec get_bbox(MapSet.t()) :: [{integer(), integer()}]
   defp get_bbox(board) do
     Enum.to_list(board)
     |> Enum.map(&Tuple.to_list/1)
@@ -37,6 +38,7 @@ defmodule AdventOfCode.Day17 do
     |> Enum.map(&Enum.min_max/1)
   end
 
+  @spec steps_3d(MapSet.t(), non_neg_integer()) :: MapSet.t()
   defp steps_3d(board, 0), do: board
 
   defp steps_3d(board, steps) do
@@ -74,6 +76,7 @@ defmodule AdventOfCode.Day17 do
     steps_3d(board, steps - 1)
   end
 
+  @spec steps_4d(MapSet.t(), non_neg_integer()) :: MapSet.t()
   defp steps_4d(board, 0), do: board
 
   defp steps_4d(board, steps) do

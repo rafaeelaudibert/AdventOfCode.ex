@@ -1,6 +1,7 @@
 import AdventOfCode.Helpers.Input
 
 defmodule AdventOfCode.Day19 do
+  @spec parse_lines_to_rules([String.t()]) :: %{}
   defp parse_lines_to_rules(lines_of_rules) do
     Enum.map(lines_of_rules, fn line ->
       [number, rule] = String.split(line, ": ", parts: 2)
@@ -9,6 +10,7 @@ defmodule AdventOfCode.Day19 do
     |> Enum.into(%{})
   end
 
+  @spec parse_lines_to_rules(String.t()) :: [[non_neg_integer()]]
   defp rules_to_list(rule) do
     String.split(rule, " | ")
     |> Enum.map(fn follow_rules ->
@@ -16,6 +18,7 @@ defmodule AdventOfCode.Day19 do
     end)
   end
 
+  @spec expand_rules(%{}, non_neg_integer(), %{}) :: {non_neg_integer(), %{}}
   defp expand_rules(rules, idx, memory \\ %{}) do
     if memory[idx] != nil do
       {memory[idx], memory}
@@ -47,6 +50,7 @@ defmodule AdventOfCode.Day19 do
     end
   end
 
+  @spec consume(String.t(), %{}, non_neg_integer()) :: {String.t(), non_neg_integer()}
   defp consume(message, rules, count \\ 0) do
     rule = Enum.find(rules, &String.starts_with?(message, &1))
 
