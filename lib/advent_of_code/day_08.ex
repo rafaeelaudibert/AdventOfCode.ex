@@ -1,26 +1,14 @@
 import AdventOfCode.Helpers.Input
 
 defmodule AdventOfCode.Day08 do
-  def until_halted_or_loop({computer, repeated}) do
-    new_computer = AdventOfCode.Computer.step(computer)
-
-    if computer.is_halted or MapSet.member?(repeated, computer.program_counter),
-      do: nil,
-      else: {
-        new_computer,
-        {
-          new_computer,
-          MapSet.put(repeated, computer.program_counter)
-        }
-      }
-  end
-
   @spec part1(String.t()) :: non_neg_integer()
   def part1(filename) do
-    read_lines(filename)
-    |> AdventOfCode.Computer.build_from_input()
-    |> AdventOfCode.Computer.step_until_halted_or_loop()
-    |> (& &1.accumulator).()
+    computer =
+      read_lines(filename)
+      |> AdventOfCode.Computer.build_from_input()
+      |> AdventOfCode.Computer.step_until_halted_or_loop()
+
+    computer.accumulator
   end
 
   @spec part2(String.t()) :: non_neg_integer()
@@ -49,7 +37,7 @@ defmodule AdventOfCode.Day08 do
     |> Enum.map(
       &spawn(fn ->
         AdventOfCode.Computer.step_until_halted_or_loop(&1)
-        |> (fn pid -> send(parent, {self(), pid}) end).()
+        |> (fn result -> send(parent, {self(), result}) end).()
       end)
     )
     |> Enum.find_value(fn pid ->

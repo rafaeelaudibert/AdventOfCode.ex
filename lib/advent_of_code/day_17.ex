@@ -58,7 +58,7 @@ defmodule AdventOfCode.Day17 do
             pos = {z, y, x}
 
             cond do
-              # Notice that it is [3, 4] and to [2, 3] because we are counting
+              # Notice that it is [3, 4] and not [2, 3] because we are counting
               # itself as a neighbour
               MapSet.member?(board, pos) and neighbours in [3, 4] ->
                 MapSet.put(map, pos)
@@ -97,7 +97,7 @@ defmodule AdventOfCode.Day17 do
               pos = {w, z, y, x}
 
               cond do
-                # Notice that it is [3, 4] and to [2, 3] because we are counting
+                # Notice that it is [3, 4] and not [2, 3] because we are counting
                 # itself as a neighbour
                 MapSet.member?(board, pos) and neighbours in [3, 4] ->
                   MapSet.put(map, pos)

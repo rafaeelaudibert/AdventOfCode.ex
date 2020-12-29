@@ -23,11 +23,14 @@ defmodule AdventOfCode.Day23 do
     |> Enum.find(fn val -> not MapSet.member?(removed_set, val) end)
   end
 
-  @spec play(%{}, non_neg_integer(), non_neg_integer(), non_neg_integer()) :: %{}
-  defp play(map, _, _, 0), do: map
+  @spec play(%{}, non_neg_integer(), non_neg_integer(), non_neg_integer(), non_neg_integer()) ::
+          %{}
+  defp play(map, _, _, 0, _), do: map
 
-  defp play(map, current, max, rounds) do
-    if rem(rounds, 10000) == 0, do: IO.inspect(rounds)
+  defp play(map, current, max, rounds, max_rounds) do
+    if rem(rounds, 10000) == 0,
+      do: ProgressBar.render(10_000_000 - rounds, 10_000_000, suffix: :count)
+
     removed = traverse_linked_list(map, map[current], 4)
     [first, second, last, next] = removed
     removed_set = MapSet.new([first, second, last])
@@ -38,7 +41,7 @@ defmodule AdventOfCode.Day23 do
       |> Map.put(destination, first)
       |> Map.put(last, map[destination])
 
-    play(new_map, new_map[current], max, rounds - 1)
+    play(new_map, new_map[current], max, rounds - 1, max_rounds)
   end
 
   @spec map_to_string(%{}, non_neg_integer(), non_neg_integer()) :: String.t()
@@ -62,7 +65,7 @@ defmodule AdventOfCode.Day23 do
     List.to_tuple(input)
     |> window()
     |> Enum.into(Map.put(%{}, last, first))
-    |> play(first, max, rounds)
+    |> play(first, max, rounds, rounds)
     |> map_to_string(1, max)
   end
 
@@ -77,18 +80,17 @@ defmodule AdventOfCode.Day23 do
       |> String.split("", trim: true)
       |> Enum.map(&String.to_integer/1)
 
+    max = Enum.max(input)
     first = Enum.at(input, 0)
 
     # Fill the missing ones in the input
-    max = Enum.max(input)
-
     input =
       (input ++ (Stream.iterate(max + 1, &(&1 + 1)) |> Enum.take(expand_until - max)))
       |> List.to_tuple()
 
     window(input)
     |> Enum.into(Map.put(%{}, expand_until, first))
-    |> play(first, expand_until, rounds + 1)
+    |> play(first, expand_until, rounds + 1, rounds)
     |> (&(&1[1] * &1[&1[1]])).()
   end
 end

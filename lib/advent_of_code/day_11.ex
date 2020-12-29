@@ -1,6 +1,8 @@
 import AdventOfCode.Helpers.Input
 
 defmodule AdventOfCode.Day11 do
+  @neighbours [{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}]
+
   @type pattern :: [[String.t()]]
   @type application_func :: (pattern(), non_neg_integer(), non_neg_integer() -> String.t())
 
@@ -12,8 +14,7 @@ defmodule AdventOfCode.Day11 do
     value = Enum.at(pattern, idx_out) |> Enum.at(idx_inside)
 
     neighbours =
-      [{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}]
-      |> Enum.map(fn {dout, dinside} ->
+      Enum.map(@neighbours, fn {dout, dinside} ->
         Enum.at(pattern, if_neg_number(idx_out + dout), [])
         |> Enum.at(if_neg_number(idx_inside + dinside))
       end)
@@ -37,12 +38,13 @@ defmodule AdventOfCode.Day11 do
     value = Enum.at(pattern, idx_out) |> Enum.at(idx_inside)
 
     neighbours =
-      [{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}]
-      |> Enum.map(fn {dout, din} ->
-        Stream.iterate({dout, din}, fn {dout_, din_} -> {dout + dout_, din + din_} end)
+      Enum.map(@neighbours, fn {dout_start, din_start} ->
+        Stream.iterate({dout_start, din_start}, fn {dout, din} ->
+          {dout_start + dout, din_start + din}
+        end)
       end)
-      |> Enum.map(fn stream ->
-        Enum.find_value(stream, fn {dout, dinside} ->
+      |> Enum.map(fn neighbours ->
+        Enum.find_value(neighbours, fn {dout, dinside} ->
           Enum.at(pattern, if_neg_number(idx_out + dout), [])
           |> Enum.at(if_neg_number(idx_inside + dinside))
           |> (fn val ->

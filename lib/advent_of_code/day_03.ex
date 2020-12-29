@@ -29,6 +29,6 @@ defmodule AdventOfCode.Day03 do
 
     slopes
     |> Enum.map(&compute_trees(matrix, &1))
-    |> Enum.reduce(1, fn x, acc -> x * acc end)
+    |> Enum.reduce(1, &*/2)
   end
 end

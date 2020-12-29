@@ -39,6 +39,14 @@ defmodule AdventOfCode.Helpers.Input do
     |> Enum.filter(&(Enum.at(&1, 0) != separator))
   end
 
+  @spec read_line(String.t()) :: String.t()
+  @doc """
+    Given a filename, read the very first line in the file,
+    and returns it. A line is understood as ended by a `\\n`
+    character.
+  """
+  def read_line(filename), do: read_lines(filename) |> List.first()
+
   @spec read_lines(String.t()) :: [String.t()]
   @doc """
     Given a filename, reads every line in the file, and returns

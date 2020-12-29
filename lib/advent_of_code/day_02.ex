@@ -5,11 +5,9 @@ defmodule AdventOfCode.Day02 do
 
   @spec parse_line(String.t()) :: password()
   defp parse_line(content) do
-    [digits, letter, password] = String.split(content, " ")
-    [digit_0, digit_1] = String.split(digits, "-") |> Enum.map(&String.to_integer/1)
-    letter = String.slice(letter, 0..0)
+    [digit_0, digit_1, letter, password] = String.split(content, [" ", "-", ":"], trim: true)
 
-    {digit_0, digit_1, letter, password}
+    {String.to_integer(digit_0), String.to_integer(digit_1), letter, password}
   end
 
   @spec is_on_range(password()) :: boolean()
@@ -30,15 +28,13 @@ defmodule AdventOfCode.Day02 do
   def part1(filename) do
     read_lines(filename)
     |> Enum.map(&parse_line/1)
-    |> Enum.map(&is_on_range/1)
-    |> Enum.count(& &1)
+    |> Enum.count(&is_on_range/1)
   end
 
   @spec part2(String.t()) :: non_neg_integer()
   def part2(filename) do
     read_lines(filename)
     |> Enum.map(&parse_line/1)
-    |> Enum.map(&is_on_positions/1)
-    |> Enum.count(& &1)
+    |> Enum.count(&is_on_positions/1)
   end
 end

@@ -1,7 +1,7 @@
 import AdventOfCode.Helpers.Input
 
 defmodule AdventOfCode.Day05 do
-  use Bitwise
+  use Bitwise, only_operators: true
 
   @spec parse_to_binary([String.t()]) :: non_neg_integer()
   defp parse_to_binary(items) do

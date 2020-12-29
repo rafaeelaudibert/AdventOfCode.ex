@@ -24,8 +24,7 @@ defmodule AdventOfCode.Day15 do
   @spec solve(String.t(), non_neg_integer()) :: non_neg_integer()
   defp solve(filename, limit) do
     input =
-      read_lines(filename)
-      |> Enum.at(0)
+      read_line(filename)
       |> String.split(",")
       |> Enum.map(&String.to_integer/1)
 

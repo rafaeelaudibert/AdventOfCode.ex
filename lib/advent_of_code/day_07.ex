@@ -6,7 +6,7 @@ defmodule AdventOfCode.Day07 do
 
   @spec parse_bags_string(String.t()) :: {String.t(), [bag()]}
   defp parse_bags_string(bags_string) do
-    [_ | [bag_color, other_colors]] = Regex.run(~r/(.+) bags contain (.+)\./U, bags_string)
+    [_, bag_color, other_colors] = Regex.run(~r/(.+) bags contain (.+)\./U, bags_string)
 
     other_colors =
       String.split(other_colors, ", ")

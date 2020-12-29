@@ -4,16 +4,14 @@ defmodule AdventOfCode.Day22 do
   @type deck :: [non_neg_integer()]
 
   @spec step([deck]) :: [deck]
-  defp step([[top1 | tail1], [top2 | tail2]]) do
-    if top1 > top2 do
-      [tail1 ++ [top1, top2], tail2]
-    else
-      [tail1, tail2 ++ [top2, top1]]
-    end
-  end
+  defp step([[top1 | tail1], [top2 | tail2]]) when top1 > top2,
+    do: [tail1 ++ [top1, top2], tail2]
 
-  # If can't match the above pattern matching, it is because
-  # some list is empty, so we finish it
+  defp step([[top1 | tail1], [top2 | tail2]]) when top2 > top1,
+    do: [tail1, tail2 ++ [top2, top1]]
+
+  # When there is no matching in above patterns,
+  # someone has no cards, game has ended
   defp step(_), do: nil
 
   @spec play_game([deck]) :: [deck]
@@ -33,7 +31,7 @@ defmodule AdventOfCode.Day22 do
 
     if depth > 0 and max_deck1 > max_deck2 and max_deck1 > length(deck1) + length(deck2) - 2 do
       # Optimization by curious_sapi3n at Reddit
-      # If it is a sub game, and the player 1 has the maximum card, it will
+      # If it is a sub game, and the player 1 has the maximum card, it will win
       # https://www.reddit.com/r/adventofcode/comments/khyjgv/2020_day_22_solutions/ggpcsnd?utm_source=share&utm_medium=web2x&context=3
       [deck1 ++ deck2, []]
     else

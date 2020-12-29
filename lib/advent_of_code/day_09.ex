@@ -51,13 +51,13 @@ defmodule AdventOfCode.Day09 do
 
   @spec part2(String.t()) :: non_neg_integer()
   def part2(filename) do
-    # invalid_number = part1(filename)
+    # invalid_number = part1(filename) # but we can just hardcode it to make it faster
     invalid_number = 50_047_984
 
     [head_input | tail_input] = read_integers(filename)
 
     find_list_of_sum([head_input], head_input, invalid_number, tail_input)
-    |> (fn list -> [Enum.max(list), Enum.min(list)] end).()
+    |> Enum.min_max()
     |> Enum.sum()
   end
 end

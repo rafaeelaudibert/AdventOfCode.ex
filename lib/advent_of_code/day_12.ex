@@ -48,10 +48,15 @@ defmodule AdventOfCode.Day12 do
     {command, String.to_integer(value)}
   end
 
+  @spec parse_line(String.t()) :: command
+  defp parse_line(line) do
+    String.split(line, "", parts: 3) |> Enum.drop(1) |> input_to_command()
+  end
+
   @spec part1(String.t()) :: non_neg_integer()
   def part1(filename) do
     read_lines(filename)
-    |> Enum.map(&(&1 |> String.split("", parts: 3) |> Enum.drop(1) |> input_to_command()))
+    |> Enum.map(&parse_line/1)
     |> Enum.reduce({0, 0, {1, 0}}, &move_boat_rules_1/2)
     |> (fn {east_pos, north_pos, _} -> abs(east_pos) + abs(north_pos) end).()
   end
@@ -59,7 +64,7 @@ defmodule AdventOfCode.Day12 do
   @spec part2(String.t()) :: non_neg_integer()
   def part2(filename) do
     read_lines(filename)
-    |> Enum.map(&(&1 |> String.split("", parts: 3) |> Enum.drop(1) |> input_to_command()))
+    |> Enum.map(&parse_line/1)
     |> Enum.reduce({0, 0, {10, 1}}, &move_boat_rules_2/2)
     |> (fn {east_pos, north_pos, _} -> abs(east_pos) + abs(north_pos) end).()
   end

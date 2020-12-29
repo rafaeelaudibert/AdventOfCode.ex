@@ -94,8 +94,6 @@ defmodule AdventOfCode.Day18 do
 
   @spec part2(String.t()) :: non_neg_integer()
   def part2(filename) do
-    read_lines(filename)
-    |> Enum.map(&solve(String.graphemes(&1)))
-    |> Enum.sum()
+    read_lines(filename) |> Enum.map(&solve(String.graphemes(&1))) |> Enum.sum()
   end
 end

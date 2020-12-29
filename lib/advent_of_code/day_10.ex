@@ -23,11 +23,7 @@ defmodule AdventOfCode.Day10 do
             {0, dp}
           end
 
-        Map.put(
-          dp,
-          idx_hash,
-          result
-        )
+        Map.put(dp, idx_hash, result)
       else
         dp
       end

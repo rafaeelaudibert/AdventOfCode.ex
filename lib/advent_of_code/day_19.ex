@@ -68,8 +68,9 @@ defmodule AdventOfCode.Day19 do
     rules = parse_lines_to_rules(lines_of_rules)
 
     # We can do the following, because if we expand the 0 rule we have 42 42 31
+    # so we only need 42 and 31 and hardcode its unions
     [rules_42, rules_31] =
-      Enum.map([42, 31], &(rules |> expand_rules(&1) |> elem(0) |> MapSet.new()))
+      Enum.map([42, 31], &(expand_rules(rules, &1) |> elem(0) |> MapSet.new()))
 
     Enum.count(messages, fn message ->
       {rest_message, count_42} = consume(message, rules_42)
@@ -87,8 +88,9 @@ defmodule AdventOfCode.Day19 do
     # We can do the following, because if we expand the 0 rule we have
     # 42 42+ 31+, this is, n rules 42 followed by m rules 31, where n and m are not 0
     # and m needs to be less than n
+    # this way, we only need to compute 42 and 31 and hardcode its unions
     [rules_42, rules_31] =
-      Enum.map([42, 31], &(rules |> expand_rules(&1) |> elem(0) |> MapSet.new()))
+      Enum.map([42, 31], &(expand_rules(rules, &1) |> elem(0) |> MapSet.new()))
 
     Enum.count(messages, fn message ->
       {rest_message, count_42} = consume(message, rules_42)
