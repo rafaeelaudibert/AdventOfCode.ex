@@ -58,6 +58,7 @@ defmodule AdventOfCode.Day09 do
 
     find_list_of_sum([head_input], head_input, invalid_number, tail_input)
     |> Enum.min_max()
+    |> List.new()
     |> Enum.sum()
   end
 end
